@@ -11,6 +11,7 @@ public class IndexController {
 	@RequestMapping("/")
 	public String index(HttpServletRequest req,Model model) {
 		System.out.println("你好啊");
+		model.addAttribute("hah", "haha");
 		return "hello";
 	}
 
