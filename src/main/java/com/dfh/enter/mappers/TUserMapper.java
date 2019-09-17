@@ -4,9 +4,9 @@ import java.util.List;
 
 
 import com.dfh.enter.entity.TUser;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface TUserMapper {
 	List<TUser> findAll();
 }
