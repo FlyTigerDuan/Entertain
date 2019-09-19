@@ -15,6 +15,17 @@ spring :
         max-idle: 300
         max-active: 600
         max-wait: 1000
+  activemq:
+    broker-url: tcp://49.235.118.172:61616
+    user: admin
+    password: admin
+    pool:
+      enabled: false
+      max-connections: 50
+      idle-timeout: 30000
+    in-memory: true
+  jms:
+    pub-sub-domain: true
 mybatis :
   mapper-locations : classpath*:/mappers/*.xml
   type-aliases-package : com.dfh.enter.mappers.*

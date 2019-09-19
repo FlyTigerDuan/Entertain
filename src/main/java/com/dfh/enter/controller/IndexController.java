@@ -1,7 +1,10 @@
 package com.dfh.enter.controller;
 
+import javax.jms.Queue;
+import javax.jms.Topic;
 import javax.servlet.http.HttpServletRequest;
 
+import com.dfh.enter.jms.JMSProducer;
 import com.dfh.enter.service.TUserService;
 import com.dfh.enter.service.impl.RedisService;
 import com.google.gson.Gson;
@@ -19,6 +22,12 @@ public class IndexController {
 	private TUserService userService;
 	@Autowired
 	private RedisService redisService;
+	@Autowired
+	private JMSProducer jmsProducer;
+	@Autowired
+	private Topic topic;
+	@Autowired
+	private Queue queue;
 	@RequestMapping("/")
 	public String index(HttpServletRequest req,Model model) {
 		redisService.set("aaa","你好啊");
@@ -32,6 +41,15 @@ public class IndexController {
 		Gson gson = new Gson();
 		String result = gson.toJson(userService.findAll());
 		return result;
+	}
+
+	@RequestMapping("/sendeMessage")
+	public String sendeMessage(HttpServletRequest req,Model model) {
+		for (int i=0;i<10;i++) {
+			jmsProducer.sendMessage(queue,"queue,world!" + i);
+			jmsProducer.sendMessage(topic, "topic,world!" + i);
+		}
+		return "消息发送成功";
 	}
 
 }
