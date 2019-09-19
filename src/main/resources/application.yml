@@ -6,7 +6,16 @@ spring :
     url : jdbc:mysql://49.235.118.172:3306/entertain
     username : root
     password : Ddfh960510@
+  redis:
+    host: 49.235.118.172
+    port: 6379
+    password: 123
+    jedis:
+      pool:
+        max-idle: 300
+        max-active: 600
+        max-wait: 1000
 mybatis :
   mapper-locations : classpath*:/mappers/*.xml
   type-aliases-package : com.dfh.enter.mappers.*
-  
+
